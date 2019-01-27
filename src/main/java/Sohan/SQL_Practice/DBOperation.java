@@ -8,10 +8,10 @@ import java.sql.Statement;
 
 public class DBOperation {
 	
-	public static int SQL_WildCard() throws SQLException {
+	public static int SQL_WildCard(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM dbo.T_Employee_Details WHERE eID LIKE '[1-4]%'");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -19,10 +19,10 @@ public class DBOperation {
 		return x;
 	}
 
-	public static int SQL_In() throws SQLException {
+	public static int SQL_In(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM dbo.T_Employee_Details WHERE eID IN (1,2,3,4,5)");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -30,10 +30,10 @@ public class DBOperation {
 		return x;
 	}
 	
-	public static int SQL_Between() throws SQLException {
+	public static int SQL_Between(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM dbo.T_Employee_Details WHERE eID BETWEEN 10 and 20");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -41,10 +41,10 @@ public class DBOperation {
 		return x;
 	}
 	
-	public static int SQL_InnerJoin() throws SQLException {
+	public static int SQL_InnerJoin(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT dbo.T_Employee_Details.eName, dbo.T_Employee_Details_2.eCity FROM dbo.T_Employee_Details INNER JOIN dbo.T_Employee_Details_2 ON dbo.T_Employee_Details.eID=dbo.T_Employee_Details_2.eID");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -52,10 +52,10 @@ public class DBOperation {
 		return x;
 	}
 	
-	public static int SQL_LeftJoin() throws SQLException {
+	public static int SQL_LeftJoin(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT dbo.T_Employee_Details.eName, dbo.T_Employee_Details_2.eCity FROM dbo.T_Employee_Details Left JOIN dbo.T_Employee_Details_2 ON dbo.T_Employee_Details.eID=dbo.T_Employee_Details_2.eID");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -63,10 +63,10 @@ public class DBOperation {
 		return x;
 	}
 
-	public static int SQL_RightJoin() throws SQLException {
+	public static int SQL_RightJoin(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT dbo.T_Employee_Details.eName, dbo.T_Employee_Details_2.eCity FROM dbo.T_Employee_Details RIGHT JOIN dbo.T_Employee_Details_2 ON dbo.T_Employee_Details.eID=dbo.T_Employee_Details_2.eID");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -74,10 +74,10 @@ public class DBOperation {
 		return x;
 	}
 	
-	public static int SQL_FullJoin() throws SQLException {
+	public static int SQL_FullJoin(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT dbo.T_Employee_Details.eName, dbo.T_Employee_Details_2.eCity FROM dbo.T_Employee_Details FULL OUTER JOIN dbo.T_Employee_Details_2 ON dbo.T_Employee_Details.eID=dbo.T_Employee_Details_2.eID");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -85,10 +85,10 @@ public class DBOperation {
 		return x;
 	}
 
-	public static int SQL_SelfJoin() throws SQLException {
+	public static int SQL_SelfJoin(String str) throws SQLException {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT A.eName AS Name1,B.eName AS Name2, A.eCity FROM dbo.T_Employee_Details_2 A, dbo.T_Employee_Details_2 B WHERE A.eID<>B.eID AND A.eCity=B.eCity");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -96,10 +96,10 @@ public class DBOperation {
 		return x;
 	}
 	
-	public static int SQL_Union() throws SQLException  {
+	public static int SQL_Union(String str) throws SQLException  {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT eID FROM dbo.T_Employee_Details_2 UNION SELECT eID FROM dbo.T_Employee_Details");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -107,10 +107,10 @@ public class DBOperation {
 		return x;
 	}
 
-	public static int SQL_GroupBy() throws SQLException  {
+	public static int SQL_GroupBy(String str) throws SQLException  {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT COUNT(eID), eCity FROM dbo.T_Employee_Details_2 GROUP BY eCity");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -118,10 +118,10 @@ public class DBOperation {
 		return x;
 	}
 	
-	public static int SQL_Having() throws SQLException  {
+	public static int SQL_Having(String str) throws SQLException  {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT COUNT(eID), eCity FROM dbo.T_Employee_Details_2 GROUP BY eCity HAVING COUNT(eID)>10");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
@@ -129,12 +129,10 @@ public class DBOperation {
 		return x;
 	}
 	
-
-	
-	public static int SQL_EXISTS() throws SQLException  {
+	public static int SQL_EXISTS(String str) throws SQLException  {
 		Connection connection =  DBConnection.getConnection();
 		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT eID FROM dbo.T_Employee_Details WHERE EXISTS(SELECT eID WHERE eID = dbo.T_Employee_Details.eID AND EsALARY>50)");
+		ResultSet rs = stmt.executeQuery(str);
 		int x=0;
 		while (rs.next()) {
 			x++;
